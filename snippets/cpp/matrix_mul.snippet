@@ -1,0 +1,18 @@
+#define type long double
+
+void matrix_mul(type matA[N][M], type matB[M][P], type matAns[N][P])
+{
+	type temp[N][P];
+	for(int i = 0; i < N; i++)
+	{
+		for(int j = 0; j < P; j++)
+		{
+			temp[i][j] = 0;
+			for(int k = 0; k < M; k++)
+			{
+				temp[i][j] += matA[i][k] * matB[k][j];
+			}
+		}
+	}
+	memcpy(matAns, temp, sizeof(temp));
+}

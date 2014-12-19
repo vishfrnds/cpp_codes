@@ -1,0 +1,17 @@
+ll data[100009];
+
+void update(int at, int by) {
+    while (at < 100008) {
+        data[at] += by;
+        at |= (at + 1);
+    }
+}
+
+ll quer(int at) {
+    ll res = 0;
+    while (at >= 0) {
+        res += data[at];
+        at = (at & (at + 1)) - 1;
+    }
+    return res;
+}

@@ -1,0 +1,27 @@
+#define S 100009
+
+vector<int> pFactor[S + 1];
+vector<bool> prime(S + 1, true);
+vector<int> pr;
+void seive()
+{
+	prime[0] = prime[1] = false;
+	for(int i = 2; i <= S; i++)
+	{
+		if(prime[i])
+		{
+			pFactor[i].pb(i);
+			pr.pb(i);
+			for(int j = 2 * i; j <= S; j += i)
+			{
+				int jj = j;
+				while(jj % i == 0)
+				{
+					pFactor[j].pb(i);
+					jj /= i;
+				}
+				prime[j] = false;
+			}
+		}
+	}
+}

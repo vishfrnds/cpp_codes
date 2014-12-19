@@ -1,0 +1,11 @@
+ll powe(int x, int n, int m)
+{
+	if(!n)
+		return 1;
+	ll ans = powe(x, n/2, m);
+	ans = (ans * ans) % m;
+	if(n & 1)
+		ans  = (ans * x) % m;
+	return ans;
+}
+

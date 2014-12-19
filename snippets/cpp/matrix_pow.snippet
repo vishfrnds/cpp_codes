@@ -1,0 +1,38 @@
+#define type long double
+
+void matrix_mul(type matA[N][M], type matB[M][P], type matAns[N][P])
+{
+	type temp[N][P];
+	for(int i = 0; i < N; i++)
+	{
+		for(int j = 0; j < P; j++)
+		{
+			temp[i][j] = 0;
+			for(int k = 0; k < M; k++)
+			{
+				temp[i][j] += matA[i][k] * matB[k][j];
+			}
+		}
+	}
+	memcpy(matAns, temp, sizeof(temp));
+}
+
+void matrix_pow(type mat[N][N], int n, type ans[N][N])
+{
+	if(!n)
+	{
+		for(int i = 0; i < N; i++)
+			for(int j = 0; j < N; j++)
+				if(i == j)
+					ans[i][j] = 1;
+				else
+					ans[i][j] = 0;
+	}
+	else
+	{
+		matrix_pow(mat, n / 2, ans);
+		matrix_mul(ans, ans, ans);
+		if(n & 1)
+			matrix_mul(mat, ans, ans);
+	}
+}
